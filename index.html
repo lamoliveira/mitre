@@ -358,6 +358,117 @@
     <!--[if lt IE 9]>
     <script src="https://ri.mitrerealty.com.br/wp-content/themes/mziq_mitre_ri/js/html5shiv.js"></script>
   <![endif]-->
+
+
+
+
+  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.8.0.min.js"></script>
+  <script type="text/javascript">
+  
+  window.addEventListener("load", mediaSizer);
+          //window.addEventListener("resize", mediaSizer);
+          // Listeners that will react when the page first loads or is resized.
+          // If any of these events take place the mediaSizer() function executes.
+  
+          var vizList = [
+  
+                      
+                      "https://demo.tableau.com/t/LuizOliveira/views/FinanasCorporativas-PainelDemonstrativoFinanceiro_16534926886260/Cockpit-Finance",
+                      "https://demo.tableau.com/t/LuizOliveira/views/HUMANRESOURCES-HRExpensesDashboardBrasil_16534926866470/Cockpit",
+                      "https://demo.tableau.com/t/LuizOliveira/views/Embedded_Analytics_DemoPT-BR_16534967476620/Maisrecursos"
+  
+                  ];
+          // Array of Tableau Server URLs for dashboard or sheet navigation.
+      
+          var viz,
+              vizLen = vizList.length,
+              vizCount = 0,
+              devType;
+          var options = {
+              device: devType,
+          };
+  
+  
+          function mediaSizer() {
+          // Determines the correct viz layout according to screen sizes.
+              if (window.matchMedia("(max-width: 480px)").matches) {
+                  //alert("I am a phone layout!");
+                  devType = 'phone';
+                  vWidth = 450;
+                  vHeight = 2000;
+                  //options.device = 'phone';
+              } else if (window.matchMedia("(max-width: 980px)").matches) {
+                  //alert("I am a tablet layout!");
+                  devType = 'tablet';
+                  vWidth = 980;
+                  //options.device = 'tablet';
+              } else {
+                  //alert("I am a desktop layout!");
+                  devType = 'desktop';
+                  vWidth = 1666;
+                  vHeight = 900;
+                  //options.device = 'desktop';
+              }
+              console.log("devtype: "+devType )
+              console.log("launch0")
+              launchViz(0);
+              console.log("launch1")        
+              launchViz(1);
+              console.log("launch1")        
+              launchViz(2);
+              // Launches the viz again with the new sizing at the current index of vizList.
+        }
+  
+  
+        function launchViz(vizNav) {
+          // JS object targeting a div in the html document. (vizNav) will pass navigation values to move back and forth across vizList.
+          console.log("vizContainer"+vizNav)
+          console.log("devtype: "+devType )
+              var vizDiv = document.getElementById("vizContainer"+vizNav),
+              // Will embed the visualization on a div with id="VizContainer"
+              options = {
+                  device: devType,
+                  width: vWidth,
+                  height: vHeight,
+                  hideTabs: false,
+                  hideToolbar: true,
+                  onFirstInteractive: function () {
+                      listenToMarksSelection();
+                  }
+              };
+              
+  
+              var vizURL = vizList[vizNav];
+              // Dynamic URL returning the string from vizList at index = vizNav (viz to be displayed).
+  
+                      try {
+                          // Initializes the viz from the array with desired options. 
+                          viz = new tableau.Viz(vizDiv, vizURL, options);
+                  if (!viz) throw 'viz not initialized'
+                      }
+                      catch(err) {
+                          alert(err);
+                      }
+                      finally {
+                          console.log('whatever')
+                          console.count('initViz')
+                      }
+              
+          }
+  
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body id="lang-pt-br"
@@ -544,8 +655,7 @@
 
     <div style="text-align: center;">
         <div style="display: inline-block;">
-            <script type='text/javascript' src='https://demo.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1666px; height: 895px;'><object class='tableauViz' width='1666' height='895' style='display:none;'><param name='host_url' value='https%3A%2F%2Fdemo.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;LuizOliveira' /><param name='name' value='FinanasCorporativas-PainelDemonstrativoFinanceiro_16534926886260&#47;Cockpit-Finance' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='showAppBanner' value='false' /></object></div>
-
+            <div id="vizContainer0" ></div>
 
         </div></div>
 <p></p>
@@ -554,8 +664,7 @@
 <div style="text-align: center;">
     <div style="display: inline-block;">
        
-        <script type='text/javascript' src='https://demo.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1600px; height: 827px;'><object class='tableauViz' width='1600' height='827' style='display:none;'><param name='host_url' value='https%3A%2F%2Fdemo.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;LuizOliveira' /><param name='name' value='HUMANRESOURCES-HRExpensesDashboardBrasil_16534926866470&#47;Cockpit' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='showAppBanner' value='false' /></object></div>
-
+        <div id="vizContainer1" ></div>
 
     </div></div>
 
@@ -563,8 +672,7 @@
     <div style="text-align: center;">
         <div style="display: inline-block;">
         
-            <script type='text/javascript' src='https://demo.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1600px; height: 950px;'><object class='tableauViz' width='1600' height='950' style='display:none;'><param name='host_url' value='https%3A%2F%2Fdemo.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;LuizOliveira' /><param name='name' value='Embedded_Analytics_DemoPT-BR_16534967476620&#47;Agenda' /><param name='tabs' value='yes' /><param name='toolbar' value='no' /><param name='showAppBanner' value='false' /></object></div>
-
+            <div id="vizContainer2" ></div>
         </div></div>
 
     <div class="pageTitle">
